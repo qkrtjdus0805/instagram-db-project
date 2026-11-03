@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% block title %}사용자 · DB Photo Lab{% endblock %}
+{% block content %}
+<h1>다른 사용자</h1><p class="muted">사용자를 클릭하면 프로필과 게시물을 볼 수 있습니다.</p>
+<section class="panel"><ul class="people">
+{% for person in people %}<li><a href="/users/{{ person.user_id|urlencode }}">{{ person.display_name }} <span class="muted">@{{ person.user_id }}</span></a></li>
+{% else %}<li>아직 다른 사용자가 없어요. 테스트용 계정을 하나 더 만들어 보세요.</li>{% endfor %}
+</ul></section>
+{% endblock %}

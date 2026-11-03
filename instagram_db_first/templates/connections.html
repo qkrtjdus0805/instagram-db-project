@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block title %}팔로우 관계 · DB Photo Lab{% endblock %}
+{% block content %}
+<h1>@{{ user_id }}의 {% if kind == 'followers' %}팔로워{% else %}팔로잉{% endif %}</h1>
+<p><a href="/users/{{ user_id|urlencode }}">← 프로필로 돌아가기</a></p>
+<section class="panel"><ul class="people">
+{% for person in people %}<li><a href="/users/{{ person.user_id|urlencode }}">{{ person.display_name }} <span class="muted">@{{ person.user_id }}</span></a></li>
+{% else %}<li>아직 사용자가 없습니다.</li>{% endfor %}
+</ul></section>
+{% endblock %}

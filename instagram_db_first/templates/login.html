@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block title %}로그인 · DB Photo Lab{% endblock %}
+{% block content %}
+<section class="panel narrow"><h1>로그인</h1>
+  <p class="muted">MySQL users 테이블의 계정으로 로그인합니다.</p>
+  <form method="post" action="/login">
+    <input type="hidden" name="csrf" value="{{ csrf }}">
+    <label>아이디<input name="user_id" required autocomplete="username"></label>
+    <label>비밀번호<input name="password" type="password" required autocomplete="current-password"></label>
+    <button type="submit">로그인</button>
+  </form>
+  <p>계정이 없나요? <a href="/signup">회원가입</a></p>
+</section>
+{% endblock %}

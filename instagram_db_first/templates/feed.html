@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block title %}홈 피드 · DB Photo Lab{% endblock %}
+{% block content %}
+<div class="heading"><div><h1>홈 피드</h1><p class="muted">내 게시물 + 팔로우한 사용자의 게시물 · 최신순</p></div><a class="button" href="/posts/new">사진 업로드</a></div>
+{% if posts %}
+  <div class="posts">
+    {% for post in posts %}
+      <article class="panel post">
+        <div class="post-header"><a href="/users/{{ post.author_id|urlencode }}"><strong>{{ post.display_name }}</strong> <span class="muted">@{{ post.author_id }}</span></a><span class="muted">{{ post.created_at }}</span></div>
+        <a href="/posts/{{ post.post_id }}"><img class="photo" src="{{ post.image_path }}" alt="{{ post.caption or '사진 게시물' }}" loading="lazy"></a>
+        <div class="post-body"><p>{{ post.caption }}</p><a href="/posts/{{ post.post_id }}">댓글 보기 / 작성</a></div>
+      </article>
+    {% endfor %}
+  </div>
+{% else %}<section class="panel"><p>피드가 비어 있어요. <a href="/users">다른 사용자를 팔로우</a>하거나 <a href="/posts/new">첫 사진을 업로드</a>해 보세요.</p></section>{% endif %}
+{% endblock %}

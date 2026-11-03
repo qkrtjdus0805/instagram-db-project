@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block title %}게시물 #{{ post.post_id }} · DB Photo Lab{% endblock %}
+{% block content %}
+<article class="panel post"><div class="post-header"><a href="/users/{{ post.author_id|urlencode }}"><strong>{{ post.display_name }}</strong> <span class="muted">@{{ post.author_id }}</span></a><span class="muted">{{ post.created_at }}</span></div>
+  <img class="photo" src="{{ post.image_path }}" alt="{{ post.caption or '게시물 사진' }}">
+  <div class="post-body"><p>{{ post.caption }}</p></div></article>
+<section class="panel"><h2>댓글</h2>
+  {% for comment in comments %}<div class="comment"><a href="/users/{{ comment.author_id|urlencode }}"><strong>{{ comment.display_name }}</strong></a> {{ comment.body }} <small class="muted">{{ comment.created_at }}</small></div>
+  {% else %}<p class="muted">아직 댓글이 없습니다.</p>{% endfor %}
+  <form method="post" action="/posts/{{ post.post_id }}/comments">
+    <input type="hidden" name="csrf" value="{{ csrf }}">
+    <label>댓글 작성 (@아이디 멘션 가능)<textarea name="body" maxlength="1000" required rows="2" placeholder="@alice 멋진 사진이에요!"></textarea></label>
+    <button type="submit">댓글 달기</button>
+  </form>
+</section>
+{% endblock %}
